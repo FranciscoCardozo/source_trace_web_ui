@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/*
 
 # Necesario para que GitHub emita el token OIDC que AWS valida.
 permissions:
