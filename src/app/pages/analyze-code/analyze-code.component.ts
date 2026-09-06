@@ -82,7 +82,7 @@ export class AnalyzeCodeComponent {
       this.loadingMessage = 'Iniciando análisis...';
       const result = await this.invokerService.startAnalysis(body);
 
-      if (!result?.analysisId) {
+      if (!result?.jobId) {
         throw new Error('El servicio no devolvió un identificador de análisis.');
       }
 
@@ -98,14 +98,14 @@ export class AnalyzeCodeComponent {
   goToValidation() {
     if (!this.startedAnalysis) return;
     this.router.navigate(['/validate'], {
-      queryParams: { jobId: this.startedAnalysis.analysisId }
+      queryParams: { jobId: this.startedAnalysis.jobId }
     });
   }
 
-  async copyAnalysisId() {
+  async copyJobId() {
     if (!this.startedAnalysis) return;
     try {
-      await navigator.clipboard.writeText(this.startedAnalysis.analysisId);
+      await navigator.clipboard.writeText(this.startedAnalysis.jobId);
       this.snackBar.open('Identificador copiado', 'Cerrar', { duration: 2000 });
     } catch {
       this.snackBar.open('No se pudo copiar el identificador', 'Cerrar', { duration: 3000 });
