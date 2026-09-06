@@ -17,9 +17,8 @@ export class InvokerService {
   async getUploadUrl(fileName: string, contentType: string): Promise<UploadUrlResponse> {
     const endpoint = `${this.baseUrl}${config.serviceEndpoints.getUploadUrl}`;
     const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fileName, contentType })
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
     });
 
     if (!response.ok) {
