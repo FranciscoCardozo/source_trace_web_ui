@@ -54,7 +54,7 @@ export interface UploadUrlResponse {
 
 /** Respuesta de /V1/product/analysis/invoke */
 export interface StartAnalysisResponse {
-  analysisId: string;
+  jobId: string;
   executionArn?: string;
   startDate?: string;
   status?: string;
