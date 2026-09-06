@@ -10,15 +10,23 @@ export class InvokerService {
   private readonly baseUrl = config.invokerApiEndpoint;
 
   /**
-   * Solicita un enlace prefirmado para subir el código fuente al bucket.
-   * El contentType enviado aquí queda incluido en la firma: el PUT posterior
-   * debe usar exactamente el mismo (viene en response.headers).
+   * Solicita (GET) una URL prefirmada para subir el artefacto a S3.
+   * Los parámetros viajan como query string. El contentType queda incluido en
+   * la firma: el PUT posterior debe usar exactamente el mismo (viene en response.headers).
    */
-  async getUploadUrl(fileName: string, contentType: string): Promise<UploadUrlResponse> {
-    const endpoint = `${this.baseUrl}${config.serviceEndpoints.getUploadUrl}`;
+  async getUploadUrl(
+    fileName: string,
+    contentType?: string,
+    projectId?: string
+  ): Promise<UploadUrlResponse> {
+    const params = new URLSearchParams({ fileName });
+    if (contentType) params.set('contentType', contentType);
+    if (projectId) params.set('projectId', projectId);
+
+    const endpoint = `${this.baseUrl}${config.serviceEndpoints.getUploadUrl}?${params.toString()}`;
     const response = await fetch(endpoint, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: { Accept: 'application/json' }
     });
 
     if (!response.ok) {
