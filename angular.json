@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kata-senior-assessments-web-ui": {
+    "source-trace-web-ui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/kata-senior-assessments-web-ui",
+            "outputPath": "dist/source-trace-web-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kata-senior-assessments-web-ui:build:production"
+              "buildTarget": "source-trace-web-ui:build:production"
             },
             "development": {
-              "buildTarget": "kata-senior-assessments-web-ui:build:development"
+              "buildTarget": "source-trace-web-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
