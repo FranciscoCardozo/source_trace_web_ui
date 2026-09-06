@@ -34,3 +34,34 @@ mat-icon {
   align-items: center;
   justify-content: center;
 }
+
+// Aviso reutilizable (error / pendiente) usado en varias pantallas.
+.feedback-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  line-height: 1.55;
+
+  &.error {
+    background: #fdecec;
+    border: 1px solid #f7c5c5;
+    color: #a12626;
+  }
+
+  &.pending {
+    background: #fff6e5;
+    border: 1px solid #f6dca8;
+    color: #8a5a12;
+
+    p {
+      margin: 0;
+    }
+
+    button {
+      margin-top: 12px;
+      border-radius: 10px;
+    }
+  }
+}

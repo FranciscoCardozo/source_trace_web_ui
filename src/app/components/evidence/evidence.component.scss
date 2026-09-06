@@ -1,0 +1,53 @@
+:host {
+  display: block;
+}
+
+.evidence-card {
+  padding: 22px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid var(--app-border);
+  box-shadow: 0 10px 24px rgba(31, 42, 55, 0.04);
+}
+
+h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+  color: var(--app-text);
+
+  mat-icon {
+    color: var(--primary-strong);
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+
+  figure {
+    margin: 0;
+    border: 1px solid var(--app-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fbfcff;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    color: var(--app-muted);
+  }
+}
