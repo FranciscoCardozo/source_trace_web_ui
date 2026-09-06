@@ -10,13 +10,16 @@ export class StatusService {
 
   /**
    * Consulta el estado y los resultados de un análisis por su identificador.
-   * El jobId viaja como path param: /V1/product/status/analysis/{jobId}
+   * El jobId viaja en el header 'x-job-id'.
    */
   async getAnalysisStatus(jobId: string): Promise<AnalysisStatusResponse> {
-    const endpoint = `${this.baseUrl}${config.serviceEndpoints.getStatusAnalysis}/${encodeURIComponent(jobId)}`;
+    const endpoint = `${this.baseUrl}${config.serviceEndpoints.getStatusAnalysis}`;
     const response = await fetch(endpoint, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'x-job-id': jobId
+      }
     });
 
     if (response.status === 404) {
