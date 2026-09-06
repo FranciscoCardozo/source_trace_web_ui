@@ -1,0 +1,10 @@
+<mat-card class="evidence-card" *ngIf="items.length">
+  <h3><mat-icon>image</mat-icon> {{ title }}</h3>
+
+  <div class="evidence-grid">
+    <figure *ngFor="let evidence of items">
+      <img [src]="evidenceUrl(evidence.key)" [alt]="evidence.label" loading="lazy" />
+      <figcaption>{{ evidence.label }}</figcaption>
+    </figure>
+  </div>
+</mat-card>

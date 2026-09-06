@@ -39,71 +39,7 @@
   </mat-card>
 
   <ng-container *ngIf="result && !loading">
-    <mat-card class="summary-card">
-      <div class="summary-head">
-        <div>
-          <p class="eyebrow">Análisis</p>
-          <h2>{{ result.generalInfo?.projectName || 'Proyecto sin nombre' }}</h2>
-        </div>
-        <span class="status-pill" [attr.data-status]="normalizedStatus">{{ statusLabel }}</span>
-      </div>
-
-      <div class="timestamps">
-        <span><mat-icon>schedule</mat-icon> Creado: {{ result.createdAt | date: 'medium' }}</span>
-        <span><mat-icon>update</mat-icon> Actualizado: {{ result.updatedAt | date: 'medium' }}</span>
-      </div>
-    </mat-card>
-
-    <mat-card class="feedback-card error" *ngIf="isFailed">
-      <mat-icon>report</mat-icon>
-      <span>El análisis finalizó con errores. Vuelve a intentarlo o revisa el código de origen.</span>
-    </mat-card>
-
-    <ng-container *ngIf="isCompleted">
-      <div class="cards-grid">
-        <mat-card class="info-card" *ngIf="result.generalInfo as info">
-          <h3><mat-icon>info</mat-icon> Información general</h3>
-          <dl>
-            <div><dt>Lenguaje principal</dt><dd>{{ info.mainLanguage }}</dd></div>
-            <div><dt>Framework principal</dt><dd>{{ info.mainFramework }}</dd></div>
-            <div><dt>Archivos (aprox.)</dt><dd>{{ info.approxFileCount }}</dd></div>
-            <div><dt>Patrón de arquitectura</dt><dd>{{ result.architecturePattern || '—' }}</dd></div>
-          </dl>
-        </mat-card>
-
-        <mat-card class="info-card" *ngIf="result.componentsIdentified?.length">
-          <h3><mat-icon>widgets</mat-icon> Componentes identificados</h3>
-          <mat-chip-set>
-            <mat-chip *ngFor="let component of result.componentsIdentified">{{ component }}</mat-chip>
-          </mat-chip-set>
-        </mat-card>
-      </div>
-
-      <mat-card class="info-card" *ngIf="result.functionalAnalysis?.summary">
-        <h3><mat-icon>description</mat-icon> Análisis funcional</h3>
-        <p class="summary-text">{{ result.functionalAnalysis?.summary }}</p>
-      </mat-card>
-
-      <mat-card class="info-card" *ngIf="result.evidences?.length">
-        <h3><mat-icon>image</mat-icon> Evidencias</h3>
-        <div class="evidences-grid">
-          <figure *ngFor="let evidence of result.evidences">
-            <img [src]="evidenceUrl(evidence.key)" [alt]="evidence.label" loading="lazy" />
-            <figcaption>{{ evidence.label }}</figcaption>
-          </figure>
-        </div>
-      </mat-card>
-    </ng-container>
-
-    <mat-card class="feedback-card pending" *ngIf="!isCompleted && !isFailed">
-      <mat-icon>hourglass_top</mat-icon>
-      <div>
-        <p>El análisis todavía está en curso. Vuelve a consultar en unos momentos.</p>
-        <button mat-stroked-button color="primary" (click)="consult()">
-          <mat-icon>refresh</mat-icon>
-          Actualizar
-        </button>
-      </div>
-    </mat-card>
+    <app-summary [result]="result" (refresh)="consult()"></app-summary>
+    <app-evidence [evidences]="result.evidences"></app-evidence>
   </ng-container>
 </section>
